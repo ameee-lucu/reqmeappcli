@@ -1,0 +1,268 @@
+<div class="full-width">
+    <section id="container" class="">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--logo start-->
+                <a href="#" class="logo" >YukKredit<span>.com</span></a>
+                <!--logo end-->
+                <div class="horizontal-menu navbar-collapse collapse ">
+                    <ul class="nav navbar-nav">
+                        <li ><a ng-href="#">Home</a></li>
+                        <li ng-cloak ng-show-auth="login" ng-controller="PostingCtrl"><a href="#/posting">Request Kredit</a></li>
+                        <li class="active" ng-cloak ng-show-auth="login" ng-controller="StatusCtrl"><a href="#/status">Status</a></li>
+                        <li ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/profile">Profile</a></li>
+                        <li  ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/upload">Upload</a></li>
+                        <li ng-cloak ng-show-auth="login" ng-controller="LoginController"><a href="" ng-click="logout()">Log Out</a></li>
+                        <!--
+                        <li class="dropdown" ng-cloak ng-show-auth="login">
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="">Menu <b class=" icon-angle-down"></b></a>
+                            <ul class="dropdown-menu">
+                                <li ng-cloak ng-show-auth="login" ng-controller="PostingCtrl"><a href="#/posting">Posting</a></li>
+                                <li ng-cloak ng-show-auth="login" ng-controller="StatusCtrl"><a href="#/status">Status</a></li>
+                            </ul>
+                        </li>
+                        -->
+                        <li ng-cloak ng-show-auth="['logout','error']"><a href="#/login">Log In</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content" ng-cloak ng-show-auth="login">
+            <section class="wrapper">
+                <!-- page start-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Status Permintaan Kredit
+                            </header>
+                            <div class="panel-body" ng-controller="StatusCtrl" ng-init="init()">
+                                <section id="unseen">
+                                    <div ng-show="waitingMsg" class="alert alert-info"><strong>{{waitingMsg}}</strong></div>
+                                    <table class="table table-bordered table-striped table-condensed" >
+                                        <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Unit</th>
+                                            <th>Harga</th>
+                                            <th>Status Unit</th>
+                                            <th>Status Data</th>
+                                            <th>Status Survey</th>
+                                            <th>Approval</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat='trans in listTrans'>
+                                            <td>{{trans.request_date}}</td>
+                                            <td>{{trans.merck}}</td>
+                                            <td>{{trans.price | currency : "Rp"}}</td>
+                                            <td>
+                                                <div ng-if="trans.unit_status == 'Init'">
+                                                    <span class="label label-primary">{{trans.unit_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.unit_status == 'On Progress'">
+                                                    <span class="label label-warning">{{trans.unit_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.unit_status == 'Failed'">
+                                                    <span class="label label-danger">{{trans.unit_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.unit_status == 'Ok'">
+                                                    <span class="label label-success">{{trans.unit_status}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div ng-if="trans.data_status == 'Init'">
+                                                    <span class="label label-primary">{{trans.data_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.data_status == 'On Progress'">
+                                                    <span class="label label-warning">{{trans.data_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.data_status == 'Failed'">
+                                                    <span class="label label-danger">{{trans.data_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.data_status == 'Ok'">
+                                                    <span class="label label-success">{{trans.data_status}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div ng-if="trans.survey_status == 'Init'">
+                                                    <span class="label label-primary">{{trans.survey_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.survey_status == 'On Progress'">
+                                                    <span class="label label-warning">{{trans.survey_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.survey_status == 'Failed'">
+                                                    <span class="label label-danger">{{trans.survey_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.survey_status == 'Ok'">
+                                                    <span class="label label-success">{{trans.survey_status}}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div ng-if="trans.approval_status == 'Init'">
+                                                    <span class="label label-primary">{{trans.approval_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.approval_status == 'On Progress'">
+                                                    <span class="label label-warning">{{trans.approval_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.approval_status == 'Failed'">
+                                                    <span class="label label-danger">{{trans.approval_status}}</span>
+                                                </div>
+                                                <div ng-if="trans.approval_status == 'Ok'">
+                                                    <span class="label label-success">{{trans.approval_status}}</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
+                                </section>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- page end-->
+            </section>
+        </section>
+        <!--main content end-->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                2014 &copy; YukKredit by YukKredit Team.
+                <a href="#" class="go-top">
+                    <i class="icon-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+</div>
+
+
+
+<!--
+<div class="header">
+    <ul class="nav nav-pills pull-right">
+        <li><a ng-href="#">Home</a></li>
+        <li class="active" class="dropdown" ng-cloak ng-show-auth="login">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                Menu <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-cloak ng-show-auth="login" ng-controller="PostingCtrl"><a href="#/posting">Posting</a></li>
+                <li ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/profile">Profile</a></li>
+                <li ng-cloak ng-show-auth="login" ng-controller="StatusCtrl"><a href="#/status">Status</a></li>
+            </ul>
+        </li>
+        <li ng-cloak ng-show-auth="login" ng-controller="LoginController"><a href="#" ng-click="logout()">Log Out</a></li>
+        <li ng-cloak ng-show-auth="['logout','error']"><a href="#/login">Log In</a></li>
+    </ul>
+    <h3 class="text-muted">BliKredit.com</h3>
+</div>
+<div ng-cloak class="row">
+    <div class="col-md-12">
+        <form role="form" ng-controller="StatusCtrl" ng-init="init()">
+            <fieldset>
+                <legend>Status Permintaan Kredit</legend>
+                <div class="row">
+                    <div class="col-md-12">
+                            <div class="table-responsive">
+                                <div ng-show="waitingMsg" class="alert alert-info"><strong>{{waitingMsg}}</strong></div>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Unit</th>
+                                            <th>Harga</th>
+                                            <th>Status Unit</th>
+                                            <th>Status Data</th>
+                                            <th>Status Survey</th>
+                                            <th>Approval</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                <tr ng-repeat='trans in listTrans' >
+                                                    <td>{{trans.request_date}}</td>
+                                                    <td>{{trans.merck}}</td>
+                                                    <td>{{trans.price | currency : "Rp"}}</td>
+                                                    <td>
+                                                        <div ng-if="trans.unit_status == 'Init'">
+                                                            <span class="label label-primary">{{trans.unit_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.unit_status == 'On Progress'">
+                                                            <span class="label label-warning">{{trans.unit_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.unit_status == 'Failed'">
+                                                            <span class="label label-danger">{{trans.unit_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.unit_status == 'Ok'">
+                                                            <span class="label label-success">{{trans.unit_status}}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div ng-if="trans.data_status == 'Init'">
+                                                            <span class="label label-primary">{{trans.data_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.data_status == 'On Progress'">
+                                                            <span class="label label-warning">{{trans.data_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.data_status == 'Failed'">
+                                                            <span class="label label-danger">{{trans.data_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.data_status == 'Ok'">
+                                                            <span class="label label-success">{{trans.data_status}}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div ng-if="trans.survey_status == 'Init'">
+                                                            <span class="label label-primary">{{trans.survey_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.survey_status == 'On Progress'">
+                                                            <span class="label label-warning">{{trans.survey_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.survey_status == 'Failed'">
+                                                            <span class="label label-danger">{{trans.survey_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.survey_status == 'Ok'">
+                                                            <span class="label label-success">{{trans.survey_status}}</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div ng-if="trans.approval_status == 'Init'">
+                                                            <span class="label label-primary">{{trans.approval_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.approval_status == 'On Progress'">
+                                                            <span class="label label-warning">{{trans.approval_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.approval_status == 'Failed'">
+                                                            <span class="label label-danger">{{trans.approval_status}}</span>
+                                                        </div>
+                                                        <div ng-if="trans.approval_status == 'Ok'">
+                                                            <span class="label label-success">{{trans.approval_status}}</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <br />
+        <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
+    </div>
+</div>-->

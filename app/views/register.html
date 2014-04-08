@@ -1,0 +1,537 @@
+<div class="full-width">
+    <section id="container" class="">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--logo start-->
+                <a href="#" class="logo" >YukKredit<span>.com</span></a>
+                <!--logo end-->
+                <div class="horizontal-menu navbar-collapse collapse ">
+                    <ul class="nav navbar-nav">
+                        <li><a ng-href="#">Home</a></li>
+                        <li ng-cloak ng-show-auth="login" ng-controller="PostingCtrl"><a href="#/posting">Request Kredit</a></li>
+                        <li ng-cloak ng-show-auth="login" ng-controller="StatusCtrl"><a href="#/status">Status</a></li>
+                        <li class="active" ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/profile">Profile</a></li>
+                        <li  ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/upload">Upload</a></li>
+                        <li ng-cloak ng-show-auth="login" ng-controller="LoginController"><a href="" ng-click="logout()">Log Out</a></li>
+                        <!--
+                        <li class="dropdown" ng-cloak ng-show-auth="login">
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="">Menu <b class=" icon-angle-down"></b></a>
+                            <ul class="dropdown-menu">
+                                <li ng-cloak ng-show-auth="login" ng-controller="PostingCtrl"><a href="#/posting">Posting</a></li>
+                                <li ng-cloak ng-show-auth="login" ng-controller="StatusCtrl"><a href="#/status">Status</a></li>
+                            </ul>
+                        </li>
+                        -->
+                        <li ng-cloak ng-show-auth="['logout','error']"><a href="#/login">Log In</a></li>
+                    </ul>
+                </div>
+                <!--
+                <div class="top-nav ">
+                    <ul class="nav pull-right top-menu">
+                        <li>
+                            <input type="text" class="form-control search" placeholder=" Search">
+                        </li>
+                        <li class="dropdown" ng-cloak ng-show-auth="login">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="">
+                                <img alt="" src="styles/img/avatar1_small.jpg">
+                                <span class="username">Jhon Doue</span>
+                                <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu extended logout">
+                                <div class="log-arrow-up"></div>
+                                <li ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/profile"><i class=" icon-suitcase"></i>Profile</a></li>
+                                <li ng-cloak ng-show-auth="login" ng-controller="LoginController"><a href="" ng-click="logout()"><i class="icon-key"></i> Log Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>-->
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content" ng-cloak ng-show-auth="login">
+            <section class="wrapper site-min-height">
+                <!-- page start-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                Profil
+                            </header>
+                            <div class="panel-body">
+                                <div class="stepy-tab">
+                                    <ul id="default-titles" class="stepy-titles clearfix">
+                                        <li id="default-title-0" class="current-step">
+                                            <div>Step 1</div>
+                                        </li>
+                                        <li id="default-title-1" class="">
+                                            <div>Step 2</div>
+                                        </li>
+                                        <li id="default-title-2" class="">
+                                            <div>Step 3</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <form class="form-horizontal" id="default" ng-controller="ProfileCtrl">
+                                    <fieldset title="Step1" class="step" id="default-step-0">
+                                        <legend> </legend>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Email</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.email" placeholder="Email"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Nama</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.name" placeholder="Nama"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">No. KTP</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.id_no" placeholder="No KTP"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Tanggal Berlaku KTP</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" id="idDate" ng-model="user.id_date" placeholder="Tanggal Berlaku KTP"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Alamat Sesuai KTP</label>
+                                            <div class="col-lg-10">
+                                                <textarea class="form-control" ng-model="user.address" cols="60" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Alamat Survey</label>
+                                            <div class="col-lg-10">
+                                                <textarea class="form-control" ng-model="user.surveyAddress" cols="60" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Tempat Lahir</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.birth_place" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Tanggal Lahir</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" id="datepicker" ng-model="user.birth_date" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <fieldset title="Step 2" class="step" id="default-step-1" >
+                                        <legend> </legend>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">No. Telp</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.phone" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">No. Handphone</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.handphone" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Pekerjaan</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.job" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Penghasilan</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.income" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Penghasilan Lain (Bila Ada)</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.anotherIncome" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Alamat Kantor / Alamat Usaha</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.office_address" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">No Telp. Kantor</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.office_phone" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Pekerjaan Pasangan (Bila ada)</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.partnerJob" />
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                    <fieldset title="Step 3" class="step" id="default-step-2" >
+                                        <legend> </legend>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Email</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.email" placeholder="Email"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Nama</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.name" placeholder="Nama"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">No. KTP</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.id_no" placeholder="No KTP"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Tanggal Berlaku KTP</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" id="idDate" ng-model="user.id_date" placeholder="Tanggal Berlaku KTP"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Alamat Sesuai KTP</label>
+                                            <div class="col-lg-10">
+                                                <textarea class="form-control" ng-model="user.address" cols="60" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Alamat Survey</label>
+                                            <div class="col-lg-10">
+                                                <textarea class="form-control" ng-model="user.surveyAddress" cols="60" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Tempat Lahir</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.birth_place" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Tanggal Lahir</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" id="datepicker" ng-model="user.birth_date" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">No. Telp</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.phone" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">No. Handphone</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.handphone" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Pekerjaan</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.job" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Penghasilan</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.income" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Penghasilan Lain (Bila Ada)</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.anotherIncome" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Alamat Kantor / Alamat Usaha</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.office_address" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">No Telp. Kantor</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.office_phone" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Pekerjaan Pasangan (Bila ada)</label>
+                                            <div class="col-lg-10">
+                                                <input class="form-control" type="text" ng-model="user.partnerJob" />
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                    <input type="submit" class="finish btn btn-danger"  ng-click="register()" ng-disabled="updateStatus()" value="{{updateButton}}">
+                                    <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- page end-->
+            </section>
+        </section>
+        <!--main content end-->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                2014 &copy; YukKredit by YukKredit Team.
+                <a href="#" class="go-top">
+                    <i class="icon-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+</div>
+
+
+
+
+
+
+
+<!--
+<div class="header">
+    <ul class="nav nav-pills pull-right">
+        <li><a ng-href="#">Home</a></li>
+        <li class="active" class="dropdown" ng-cloak ng-show-auth="login">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                Menu <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-cloak ng-show-auth="login" ng-controller="PostingCtrl"><a href="#/posting">Posting</a></li>
+                <li ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/profile">Profile</a></li>
+                <li ng-cloak ng-show-auth="login" ng-controller="StatusCtrl"><a href="#/status">Status</a></li>
+            </ul>
+        </li>
+        <li ng-cloak ng-show-auth="login" ng-controller="LoginController"><a href="#" ng-click="logout()">Log Out</a></li>
+        <li ng-cloak ng-show-auth="['logout','error']"><a href="#/login">Log In</a></li>
+    </ul>
+    <h3 class="text-muted">BliKredit.com</h3>
+</div>
+<div ng-cloak class="row">
+    <div class="col-md-12">
+        <form role="form" ng-controller="ProfileCtrl">
+            <fielset>
+                <legend>Profil User</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>email</label>
+                            <input class="form-control" type="text" ng-model="user.email" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input class="form-control" type="text" ng-model="user.name" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>No KTP</label>
+                            <input class="form-control" type="text" ng-model="user.id_no" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tanggal Berlaku KTP</label>
+                            <input class="form-control" type="text" id="idDate" ng-model="user.id_date" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Alamat (Sesuai KTP)</label>
+                            <textarea class="form-control" ng-model="user.address"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Alamat Survey</label>
+                            <textarea class="form-control" ng-model="user.surveyAddress"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tempat Lahir</label>
+                            <input class="form-control" type="text" ng-model="user.birth_place" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Tanggal Lahir</label>
+                            <input class="form-control" type="text" id="datepicker" ng-model="user.birth_date" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>No. Telp</label>
+                            <input class="form-control" type="text" ng-model="user.phone" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Handphone</label>
+                            <input class="form-control" type="text" ng-model="user.handphone" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Pekerjaan</label>
+                            <input class="form-control" type="text" ng-model="user.job" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gaji / Penghasilan</label>
+                            <input class="form-control" type="text" ng-model="user.income" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Penghasilan Lain (Bila Ada)</label>
+                            <input class="form-control" type="text" ng-model="user.anotherIncome" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Alamat Kantor / Alamat Usaha</label>
+                            <input class="form-control" type="text" ng-model="user.office_address" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>No Telp. Kantor</label>
+                            <input class="form-control" type="text" ng-model="user.office_phone" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Pekerjaan Pasangan (Bila ada)</label>
+                            <input class="form-control" type="text" ng-model="user.partnerJob" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Gambar / Foto / Scan KTP</label>
+                            <input type="file" ng-file-select="onIdCardFileSelect($files)">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar"  role="progressbar" aria-valuenow="{{progressIdCardFile}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressIdCardFile}}%">
+                                    <span class="sr-only">{{progressIdCardFile}}% Complete</span>
+                                </div>
+                            </div>
+                            <img src="{{user.id_card_file}}" width="20%">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gambar / Foto / Scan KK</label>
+                            <input type="file" ng-file-select="onFamilyIdFile($files)">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar"  role="progressbar" aria-valuenow="{{progressFamilyIdFile}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressFamilyIdFile}}%">
+                                    <span class="sr-only">{{progressFamilyIdFile}}% Complete</span>
+                                </div>
+                            </div>
+                            <img src="{{user.family_id_file}}" width="20%">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gambar / Foto / Scan ( PBB,Rekening Listrik,Rekening Telepon ) </label>
+                            <input type="file" ng-file-select="onDefaultGeneralFile($files)">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar"  role="progressbar" aria-valuenow="{{progressDefaultGeneralFile}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressDefaultGeneralFile}}%">
+                                    <span class="sr-only">{{progressDefaultGeneralFile}}% Complete</span>
+                                </div>
+                            </div>
+                            <img src="{{user.default_general_file}}" width="20%">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Gambar / Foto / Scan (Slip Gaji / Penghasilan) </label>
+                            <input type="file" ng-file-select="onIncomeCertificateFile($files)">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar"  role="progressbar" aria-valuenow="{{progressIncomeCertificateFile}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressIncomeCertificateFile}}%">
+                                    <span class="sr-only">{{progressIncomeCertificateFile}}% Complete</span>
+                                </div>
+                            </div>
+                            <img src="{{user.income_certificate_file}}" width="20%">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Foto Tempat Usaha (Jika jenis Pekerjaan adalah pengusaha) </label>
+                            <input type="file" ng-file-select="onBusinessPlaceFileSelect($files)">
+                            <div class="progress progress-striped active">
+                                <div class="progress-bar"  role="progressbar" aria-valuenow="{{progressBusinessPlaceFile}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressBusinessPlaceFile}}%">
+                                    <span class="sr-only">{{progressBusinessPlaceFile}}% Complete</span>
+                                </div>
+                            </div>
+                            <img src="{{user.business_place_file}}" width="20%">
+                        </div>
+
+
+
+                        <button class="btn btn-success"  ng-click="register()" ng-disabled="updateStatus()">{{updateButton}}</button>
+                        <button class="btn btn-default"  >Batal</button>
+                    </div>
+                </div>
+            </fielset>
+        </form>
+        <br />
+        <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
+
+    </div>
+</div>-->
+
+
+<script type="text/ng-template" id="notifContent.html">
+    <div class="modal-header">
+        <h3>{{result}}</h3>
+    </div>
+    <div class="modal-body">
+        <p>{{resultMsg}}</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">Langsung Upload Data</button>
+        <button class="btn btn-warning" ng-click="skip()">Skip</button>
+    </div>
+</script>
+<script>
+    //step wizard
+    $(function() {
+        $('#default').stepy({
+            backLabel: 'Sebelumnya',
+            block: true,
+            nextLabel: 'Selanjutnya',
+            titleClick: true,
+            titleTarget: '.stepy-tab'
+        });
+    });
+</script>
+<script>
+    $(function() {
+        $( "#datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            yearRange: '1950:2000'
+        });
+    });
+</script>
+<script>
+    $(function() {
+        $( "#idDate" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy"
+        });
+    });
+</script>

@@ -1,0 +1,493 @@
+<div class="full-width">
+    <section id="container" class="">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--logo start-->
+                <a href="#" class="logo" >YukKredit<span>.com</span></a>
+                <!--logo end-->
+                <div class="horizontal-menu navbar-collapse collapse ">
+                    <ul class="nav navbar-nav">
+                        <li ><a ng-href="#">Home</a></li>
+                        <li class="active" ng-cloak ng-show-auth="login" ng-controller="PostingCtrl"><a href="#/posting">Request Kredit</a></li>
+                        <li ng-cloak ng-show-auth="login" ng-controller="StatusCtrl"><a href="#/status">Status</a></li>
+                        <li  ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/profile">Profile</a></li>
+                        <li  ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/upload">Upload</a></li>
+                        <li ng-cloak ng-show-auth="login" ng-controller="LoginController"><a href="" ng-click="logout()">Log Out</a></li>
+                        <!--
+                        <li class="dropdown" ng-cloak ng-show-auth="login">
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="">Menu <b class=" icon-angle-down"></b></a>
+                            <ul class="dropdown-menu">
+                                <li ng-cloak ng-show-auth="login" ng-controller="PostingCtrl"><a href="#/posting">Posting</a></li>
+                                <li ng-cloak ng-show-auth="login" ng-controller="StatusCtrl"><a href="#/status">Status</a></li>
+                            </ul>
+                        </li>
+                        -->
+                        <li ng-cloak ng-show-auth="['logout','error']"><a href="#/login">Log In</a></li>
+                    </ul>
+                </div>
+
+
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content" ng-cloak ng-show-auth="login">
+            <section class="wrapper">
+                <!-- page start-->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <h3>Request Kredit Motor</h3>
+
+                            </header>
+                            <div class="panel-body">
+                                <form class="form-horizontal tasi-form" ng-controller="PostingCtrl">
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-primary" ng-click="onClickRdio('internet')" checked=true" ng-model="radioModel"  btn-radio="'Internet'">Internet</button>
+                                    <button type="button" class="btn btn-primary" ng-click="onClickRdio('offline')"  ng-model="radioModel" btn-radio="'Offline'">Offline</button>
+                                </div>
+
+
+                                    <!--<div class="form-group">
+                                        <label class="col-sm-2 col-sm-2 control-label"></label>
+                                        <div class="col-sm-10">
+                                                <label>
+                                                    <input type="radio" ng-click="onClickRdio('internet')" checked=true" name="type" value="Internet">
+                                                    <strong>Internet</strong>
+                                                </label>&nbsp;&nbsp;&nbsp;
+                                                <label>
+                                                    <input type="radio" ng-click="onClickRdio('offline')" name="type" value="Offline">
+                                                    <strong>Offline</strong>
+                                                </label>
+                                        </div>
+                                    </div>-->
+
+                                    <div ng-hide="internet">
+                                        <div class="form-group">
+
+                                            <label class="col-sm-10 col-sm-10 control-label"><h4>Internet</h4></label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Alamat Iklan (Tokobagus / Kaskus / Berniaga / dll)</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" ng-model="link" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Merek / Tipe</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" ng-model="merck" ng-selected="onSetMerck(merck)" typeahead="motor.Model for motor in getMerckName($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control">
+                                                <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Tahun</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" ng-change="onSetYear(selectedYear)" ng-model='selectedYear'>
+                                                    <option ng-repeat='year in range()'>{{year}}</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Harga</label>
+
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" ng-change="onSetPrice(price)" ng-model="price" />
+                                                <div ng-show="errPrice" class="alert alert-danger"><strong>{{errPrice}}</strong></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Leasing</label><br/>
+                                            <div class="col-sm-10">
+                                                <span ng-repeat='leasing in listLeasing'>
+                                                      <label>{{leasing.name}}</label>
+                                                        <input type="radio" ng-click="onSetLeasing(leasing.name)"  name="leasing" value="{{leasing.name}}">&nbsp;&nbsp;
+                                                      </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Tenor / Lama Cicilan</label><br/>
+                                            <div class="col-sm-10">
+                                                <ul ng-repeat='tenor in listTenor'>
+                                                    <li><input type="radio" ng-click="onSetTenor(tenor.tenor)"  name="tenor" value="{{tenor.tenor}}">&nbsp;&nbsp;<label>{{tenor.month}}</label></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">DP / Uang Muka</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" disabled="true" type="text" value="{{downpayment | currency: 'Rp'}}"/>
+                                                <div ng-show="downpaymentMsg" class="alert alert-info"><strong>{{downpaymentMsg}}</strong></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Angsuran</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" disabled="true" type="text" value="{{angsuran | currency : 'Rp'}}"/>
+                                                <div ng-show="angsuranMsg" class="alert alert-info"><strong>{{angsuranMsg}}</strong></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div ng-hide="offline">
+                                        <div class="form-group">
+                                            <label class="col-sm-10 col-sm-10 control-label"><h4>Dari Offline / Sudah Dapat Barang </h4></label>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Merek / Tipe</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" ng-model="merck" ng-selected="onSetMerck(merck)" typeahead="motor.Model for motor in getMerckName($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control">
+                                                <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Warna</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" ng-model="color" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Gambar / Foto Barang</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" ng-file-select="onImageFileSelect($files)" multiple>
+                                                <div class="progress progress-striped active">
+                                                    <div class="progress-bar"  role="progressbar" aria-valuenow="{{progressImageUpload}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressImageUpload}}%">
+                                                        <span class="sr-only">{{progressImageUpload}}% Complete</span>
+                                                    </div>
+                                                </div>
+                                                <div ng-repeat='image in listImage'>
+                                                    <img  ng-src="{{image}}" width="20%"><br/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Tahun</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" ng-change="onSetYear(selectedYear)" ng-model='selectedYear'>
+                                                    <option ng-repeat='year in range()'>{{year}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Harga</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" ng-change="onSetPrice(price)" ng-model="price" />
+                                                <div ng-show="errPrice" class="alert alert-danger"><strong>{{errPrice}}</strong></div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Alamat Penjual</label>
+                                            <div class="col-sm-10">
+                                                <textarea class="form-control" ng-model="sellerAddress"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">No Telp Penjual</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" type="text" ng-model="sellerPhone" />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Leasing</label><br/>
+                                            <div class="col-sm-10">
+                                                <span ng-repeat='leasing in listLeasing'>
+                                                    <label>{{leasing.name}}</label>
+                                                    <input type="radio" ng-click="onSetLeasing(leasing.name)"  name="leasing" value="{{leasing.name}}">&nbsp;&nbsp;
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Tenor / Lama Cicilan</label><br/>
+                                            <div class="col-sm-10">
+                                                <ul ng-repeat='tenor in listTenor'>
+                                                    <li><input type="radio" ng-click="onSetTenor(tenor.tenor)"  name="tenor" value="{{tenor.tenor}}">&nbsp;&nbsp;<label>{{tenor.month}}</label></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">DP / Uang Muka</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" disabled="true" type="text" value="{{downpayment | currency: 'Rp'}}"/>
+                                                <div ng-show="downpaymentMsg" class="alert alert-info"><strong>{{downpaymentMsg}}</strong></div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label">Angsuran</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" disabled="true" type="text" value="{{angsuran | currency : 'Rp'}}"/>
+                                                <div ng-show="angsuranMsg" class="alert alert-info"><strong>{{angsuranMsg}}</strong></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <br/><br/>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 col-sm-2 control-label"></label>
+                                            <div class="col-sm-10">
+                                                <button class="btn btn-success"  ng-click="posting()" ng-disabled="updateStatus()">{{updateButton}}</button>
+                                                <button class="btn btn-default">Batal</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <!-- page end-->
+            </section>
+        </section>
+        <!--main content end-->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                2014 &copy; YukKredit by YukKredit Team.
+                <a href="#" class="go-top">
+                    <i class="icon-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+</div>
+
+<!--
+<div class="header">
+    <ul class="nav nav-pills pull-right">
+        <li><a ng-href="#">Home</a></li>
+        <li class="active" class="dropdown" ng-cloak ng-show-auth="login">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="">
+                Menu <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-cloak ng-show-auth="login" ng-controller="PostingCtrl"><a href="#/posting">Posting</a></li>
+                <li ng-cloak ng-show-auth="login" ng-controller="ProfileCtrl"><a href="#/profile">Profile</a></li>
+                <li ng-cloak ng-show-auth="login" ng-controller="StatusCtrl"><a href="#/status">Status</a></li>
+            </ul>
+        </li>
+        <li ng-cloak ng-show-auth="login" ng-controller="LoginController"><a href="#" ng-click="logout()">Log Out</a></li>
+        <li ng-cloak ng-show-auth="['logout','error']"><a href="#/login">Log In</a></li>
+    </ul>
+    <h3 class="text-muted">BliKredit.com</h3>
+</div>
+<div ng-cloak class="row">
+    <div class="col-md-12">
+        <form role="form" ng-controller="PostingCtrl">
+            <fielset>
+                <legend>Request Kredit Motor</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Dari Internet</label>
+                            <input type="radio" ng-click="onClickRdio('internet')" checked=true" name="type" value="Internet">&nbsp;&nbsp;
+                            <label>Dari Offline</label>
+                            <input type="radio" ng-click="onClickRdio('offline')" name="type" value="Offline">
+                        </div>
+
+                        <div ng-hide="internet">
+                            <legend>Internet</legend>
+                            <div class="form-group">
+                                <label>Alamat Iklan (Tokobagus / Kaskus / Berniaga / dll)</label>
+                                <input class="form-control" type="text" ng-model="link" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Merek / Tipe</label>
+                                <input type="text" ng-model="merck" ng-selected="onSetMerck(merck)" typeahead="motor.Model for motor in getMerckName($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control">
+                                <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tahun</label>
+                                <select class="form-control" ng-change="onSetYear(selectedYear)" ng-model='selectedYear'>
+                                    <option ng-repeat='year in range()'>{{year}}</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Harga</label>
+                                <input class="form-control" type="text" ng-change="onSetPrice(price)" ng-model="price" />
+                                <div ng-show="errPrice" class="alert alert-danger"><strong>{{errPrice}}</strong></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Leasing</label><br/>
+
+                                <span ng-repeat='leasing in listLeasing'>
+                                    <label>{{leasing.name}}</label>
+                                    <input type="radio" ng-click="onSetLeasing(leasing.name)"  name="leasing" value="{{leasing.name}}">&nbsp;&nbsp;
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tenor / Lama Cicilan</label><br/>
+                                <ul ng-repeat='tenor in listTenor'>
+                                    <li><input type="radio" ng-click="onSetTenor(tenor.tenor)"  name="tenor" value="{{tenor.tenor}}">&nbsp;&nbsp;<label>{{tenor.month}}</label></li>
+                                </ul>
+                            </div>
+
+                            <div class="form-group">
+                                <label>DP / Uang Muka</label>
+                                <input class="form-control" disabled="true" type="text" value="{{downpayment | currency: 'Rp'}}"/>
+                                <div ng-show="downpaymentMsg" class="alert alert-info"><strong>{{downpaymentMsg}}</strong></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Angsuran</label>
+                                <input class="form-control" disabled="true" type="text" value="{{angsuran | currency : 'Rp'}}"/>
+                                <div ng-show="angsuranMsg" class="alert alert-info"><strong>{{angsuranMsg}}</strong></div>
+                            </div>
+                        </div>
+
+                        <div ng-hide="offline">
+                            <legend>Dari Offline / Sudah Dapat Barang </legend>
+                            <div class="form-group">
+                                <label>Merek / Tipe</label>
+                                <input type="text" ng-model="merck" ng-selected="onSetMerck(merck)" typeahead="motor.Model for motor in getMerckName($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control">
+                                <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Warna</label>
+                                <input class="form-control" type="text" ng-model="color" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Gambar / Foto Barang</label>
+                                <input type="file" ng-file-select="onImageFileSelect($files)" multiple>
+                                <div class="progress progress-striped active">
+                                    <div class="progress-bar"  role="progressbar" aria-valuenow="{{progressImageUpload}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progressImageUpload}}%">
+                                        <span class="sr-only">{{progressImageUpload}}% Complete</span>
+                                    </div>
+                                </div>
+                                <div ng-repeat='image in listImage'>
+                                    <img  ng-src="{{image}}" width="20%"><br/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tahun</label>
+                                <select class="form-control" ng-change="onSetYear(selectedYear)" ng-model='selectedYear'>
+                                    <option ng-repeat='year in range()'>{{year}}</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Harga</label>
+                                <input class="form-control" type="text" ng-change="onSetPrice(price)" ng-model="price" />
+                                <div ng-show="errPrice" class="alert alert-danger"><strong>{{errPrice}}</strong></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Alamat Penjual</label>
+                                <textarea class="form-control" ng-model="sellerAddress"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>No Telp Penjual</label>
+                                <input class="form-control" type="text" ng-model="sellerPhone" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Leasing</label><br/>
+
+                                <span ng-repeat='leasing in listLeasing'>
+                                    <label>{{leasing.name}}</label>
+                                    <input type="radio" ng-click="onSetLeasing(leasing.name)"  name="leasing" value="{{leasing.name}}">&nbsp;&nbsp;
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tenor / Lama Cicilan</label><br/>
+                                <ul ng-repeat='tenor in listTenor'>
+                                    <li><input type="radio" ng-click="onSetTenor(tenor.tenor)"  name="tenor" value="{{tenor.tenor}}">&nbsp;&nbsp;<label>{{tenor.month}}</label></li>
+                                </ul>
+                            </div>
+
+                            <div class="form-group">
+                                <label>DP / Uang Muka</label>
+                                <input class="form-control" disabled="true" type="text" value="{{downpayment | currency: 'Rp'}}"/>
+                                <div ng-show="downpaymentMsg" class="alert alert-info"><strong>{{downpaymentMsg}}</strong></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Angsuran</label>
+                                <input class="form-control" disabled="true" type="text" value="{{angsuran | currency : 'Rp'}}"/>
+                                <div ng-show="angsuranMsg" class="alert alert-info"><strong>{{angsuranMsg}}</strong></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-success"  ng-click="posting()" ng-disabled="updateStatus()">{{updateButton}}</button>
+                        <button class="btn btn-default">Batal</button>
+                    </div>
+                </div>
+            </fielset>
+        </form>
+        <br />
+        <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
+
+    </div>
+</div>
+-->
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3>{{result}}</h3>
+    </div>
+    <div class="modal-body">
+        {{resultMsg}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+<script>
+    $(function() {
+        $( "#datepicker" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat:"dd/mm/yy",
+            yearRange: '1950:2000'
+        });
+    });
+</script>

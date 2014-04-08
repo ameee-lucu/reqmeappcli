@@ -1,0 +1,78 @@
+<div class="login-body">
+<div class="container">
+    <form class="form-signin" action="index.html">
+        <h2 class="form-signin-heading">Masuk</h2>
+        <div class="login-wrap">
+            <input type="text" class="form-control" placeholder="Email" ng-model="email" autofocus>
+            <input type="password" class="form-control" placeholder="Password" ng-model="pass">
+            <button class="btn btn-lg btn-login btn-block" ng-click="loginPassword()" type="submit">Sign in</button>
+            <p>Atau Masuk Via Social Media</p>
+            <div class="login-social-link">
+                <a ng-click="login('facebook')" href="" class="facebook">
+                    <i class="icon-facebook"></i>
+                    Facebook
+                </a>
+                <a ng-click="login('twitter')" href="" class="twitter">
+                    <i class="icon-twitter"></i>
+                    Twitter
+                </a>
+            </div>
+
+            <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
+        </div>
+    </form>
+</div>
+</div>
+
+<!--<div class="header">
+    <ul class="nav nav-pills pull-right">
+        <li><a ng-href="#">Home</a></li>
+        <li ng-cloak ng-show-auth="login" ng-controller="LoginController"><a href="#" ng-click="logout()">Log Out</a></li>
+        <li class="active" ng-cloak ng-show-auth="['logout','error']"><a href="#/login">Log In</a></li>
+    </ul>
+    <h3 class="text-muted">BliKredit.com</h3>
+</div>
+<div ng-cloak class="row">
+    <div class="col-md-12">
+
+\        <fieldset>
+            <legend>Login Via Social Network</legend>
+            <p>
+                <button class="btn btn-lg btn-primary" ng-click="login('facebook')">Facebook</button>
+                <button class="btn btn-lg btn-primary" ng-click="login('twitter')">Twitter</button>
+            </p>
+        </fieldset>
+        <p>&nbsp;</p>
+        <form role="form">
+            <fielset>
+                <legend>Login Via Email/Password</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>email</label>
+                            <input class="form-control" type="text" ng-model="email" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>password</label>
+                            <input class="form-control" type="password" ng-model="pass" />
+                        </div>
+
+                        <div class="form-group" ng-show="createMode">
+                            <label>confirm pass</label>
+                            <input class="form-control" type="password" ng-model="confirm" />
+                        </div>
+
+                        <button class="btn btn-primary" ng-click="loginPassword()" ng-hide="createMode">Masuk</button>
+                        <button class="btn btn-default" ng-click="createMode = true" ng-hide="createMode">Daftar</button>
+                        <button class="btn btn-success" ng-show="createMode" ng-click="createAccount()">Buat Akun</button>
+                        <button class="btn btn-default" ng-show="createMode" ng-click="createMode = false">Batal</button>
+                    </div>
+                </div>
+            </fielset>
+        </form>
+        <br />
+        <div ng-show="err" class="alert alert-danger"><strong>{{err}}</strong></div>
+
+    </div>
+</div>-->
